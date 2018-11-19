@@ -15,6 +15,9 @@ export default class OwnerList extends Component {
                 <p className="card-text">
                   {owner.phoneNumber}
                 </p>
+                <a href="#"
+                  onClick={() => this.props.deleteOwner(owner.id)}
+                  className="card-link">Delete</a>
               </div>
 
             </div>
