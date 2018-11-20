@@ -4,6 +4,12 @@ import AnimalList from './animal/AnimalList'
 import LocationList from './location/LocationList'
 import EmployeeList from './employee/EmployeeList'
 import OwnerList from './owner/OwnerList'
+import Search from './search/Search'
+import AnimalManager from "../modules/AnimalManager"
+import EmployeeManager from "../modules/EmployeeManager"
+import OwnerManager from "../modules/OwnerManager"
+import LocationManager from "../modules/LocationManager"
+import PetCrosswalkManager from "../modules/PetCrosswalkManager"
 
 
 export default class ApplicationViews extends Component {
@@ -17,24 +23,40 @@ export default class ApplicationViews extends Component {
     petCrosswalk: []
   }
   componentDidMount() {
-    const newState = {}
 
-    fetch("http://localhost:5002/animals")
-      .then(r => r.json())
-      .then(animals => newState.animals = animals)
-      .then(() => fetch("http://localhost:5002/employees")
-        .then(r => r.json()))
-      .then(employees => newState.employees = employees)
-      .then(() => fetch("http://localhost:5002/locations")
-        .then(r => r.json()))
-      .then(locations => newState.locations = locations)
-      .then(() => fetch("http://localhost:5002/owners")
-        .then(r => r.json()))
-      .then(owners => newState.owners = owners)
-      .then(() => fetch("http://localhost:5002/petCrosswalk")
-        .then(r => r.json()))
-      .then(petCrosswalk => newState.petCrosswalk = petCrosswalk)
-      .then(() => this.setState(newState))
+    AnimalManager.getAll().then(allAnimals => {
+      this.setState({
+        animals: allAnimals
+      })
+    })
+      .then(() => {
+        EmployeeManager.getAll().then(allEmployees => {
+          this.setState({
+            employees: allEmployees
+          })
+        })
+      })
+      .then(() => {
+        LocationManager.getAll().then(allLocations => {
+          this.setState({
+            locations: allLocations
+          })
+        })
+      })
+      .then(() => {
+        OwnerManager.getAll().then(allOwners => {
+          this.setState({
+            owners: allOwners
+          })
+        })
+      })
+      .then(() => {
+        PetCrosswalkManager.getAll().then(allPets => {
+          this.setState({
+            petCrosswalk: allPets
+          })
+        })
+      })
   }
   deleteAnimal = id => {
     return fetch(`http://localhost:5002/animals/${id}`, {
@@ -73,6 +95,11 @@ export default class ApplicationViews extends Component {
       )
   }
 
+  searchOwners = (input) => {
+    return fetch(`http://localhost:5002/owners/?q=${input}`)
+      .then(e => e.json())
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -88,13 +115,17 @@ export default class ApplicationViews extends Component {
         }} />
         <Route path="/employees" render={(props) => {
           return <EmployeeList
-          employees={this.state.employees}
-          deleteEmployee={this.deleteEmployee}/>
+            employees={this.state.employees}
+            deleteEmployee={this.deleteEmployee} />
         }} />
         <Route path="/owners" render={(props) => {
           return <OwnerList
-          owners={this.state.owners}
-          deleteOwner={this.deleteOwner} />
+            owners={this.state.owners}
+            deleteOwner={this.deleteOwner} />
+        }} />
+        <Route path="/search" render={(props) => {
+          return <Search
+            searchOwners={this.searchOwners} />
         }} />
       </React.Fragment>
     )

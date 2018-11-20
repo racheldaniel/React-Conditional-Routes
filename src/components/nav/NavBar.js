@@ -1,9 +1,16 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
+// import Search from './search/Search'
 
+export default class NavBar extends Component {
+  state = {
+    searchInput: ""
+  }
+  handleSearch(e){
+    this.setState({searchInput: e.target.value})
+  }
 
-class NavBar extends Component {
   render() {
     return (
       <nav className="navbar navbar-light fixed-top light-blue flex-md-nowrap p-0 shadow">
@@ -20,10 +27,19 @@ class NavBar extends Component {
           <li className="nav-item">
             <Link className="nav-link" to="/owners">Owners</Link>
           </li>
+          <li className="nav-item">
+            <form className="form-inline">
+              <input type="text" className="form-control" name="name" value={this.state.searchInput} onChange={e => this.handleSearch(e)} />
+              <Link className="nav-link btn btn-primary" to="/search"                  onClick={(props) => {
+                console.log(this.state.searchInput)
+                // return <Search searchInput={this.handleSearch}/>
+              }}
+                  >Search</Link>
+            </form>
+          </li>
         </ul>
       </nav>
     )
   }
 }
 
-export default NavBar

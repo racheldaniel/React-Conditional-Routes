@@ -76,6 +76,11 @@
   ],
   "petCrosswalk": [
     {
+      "id": 1,
+      "petId": 2,
+      "ownerId": 3
+    },
+    {
       "id": 2,
       "petId": 2,
       "ownerId": 2
