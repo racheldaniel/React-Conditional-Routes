@@ -58,41 +58,26 @@ export default class ApplicationViews extends Component {
         })
       })
   }
-  deleteAnimal = id => {
-    return fetch(`http://localhost:5002/animals/${id}`, {
-      method: "DELETE"
-    })
-      .then(e => e.json())
-      .then(() => fetch(`http://localhost:5002/animals`))
-      .then(e => e.json())
-      .then(animals => this.setState({
+  deleteAnimal = (id) => {
+    return AnimalManager.removeAndList(id)
+    .then(animals => this.setState({
         animals: animals
       })
-      )
+    )
   }
   deleteEmployee = id => {
-    return fetch(`http://localhost:5002/employees/${id}`, {
-      method: "DELETE"
-    })
-      .then(e => e.json())
-      .then(() => fetch(`http://localhost:5002/employees`))
-      .then(e => e.json())
-      .then(employees => this.setState({
+    return EmployeeManager.removeAndList(id)
+    .then(employees => this.setState({
         employees: employees
       })
-      )
+    )
   }
   deleteOwner = id => {
-    return fetch(`http://localhost:5002/owners/${id}`, {
-      method: "DELETE"
-    })
-      .then(e => e.json())
-      .then(() => fetch(`http://localhost:5002/owners`))
-      .then(e => e.json())
-      .then(owners => this.setState({
+    return OwnerManager.removeAndList(id)
+    .then(owners => this.setState({
         owners: owners
       })
-      )
+    )
   }
 
   searchOwners = (input) => {
