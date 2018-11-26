@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import dog from "./DogIcon.png"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./Animal.css"
+import { Link } from "react-router-dom";
 
 export default class AnimalList extends Component {
   findOwner(animalId) {
@@ -21,27 +22,40 @@ export default class AnimalList extends Component {
   }
   render() {
     return (
-      <section className="animals">
-        {
-          this.props.animals.map(animal =>
-            <div className="card" key={animal.id}>
-              <div className="card-body">
-                <h5 className="card-title">
-                   {animal.name}
-                </h5>
-                <img src={dog} alt={animal.name} className="icon--dog" />
+      <React.Fragment>
+        <div className="animalButton">
+          <button type="button"
+            className="btn btn-success"
+            onClick={() => {
+              this.props.history.push("/animals/new")
+            }
+            }>
+            Admit Animal
+          </button>
+        </div>
+        <article className="animals">
+          {
+            this.props.animals.map(animal =>
+              <div className="card" key={animal.id}>
+                <div className="card-body">
+                  <h5 className="card-title">
+                    {animal.name}
+                  </h5>
+                  <img src={dog} alt={animal.name} className="icon--dog" />
 
-                <p className="card-text">
-                  Human(s): {this.findOwner(animal.id)}
-                </p>
-                <a href="#"
-                  onClick={() => this.props.deleteAnimal(animal.id)}
-                  className="card-link">Delete</a>
+                  <p className="card-text">
+                    Human(s): {this.findOwner(animal.id)}
+                  </p>
+                  <Link className="nav-link" to={`/animals/${animal.id}`}>Details</Link>
+                  <a href="#"
+                    onClick={() => this.props.deleteAnimal(animal.id)}
+                    className="card-link">Delete</a>
+                </div>
               </div>
-            </div>
-          )
-        }
-      </section>
+            )
+          }
+        </article>
+      </React.Fragment>
     )
   }
 }

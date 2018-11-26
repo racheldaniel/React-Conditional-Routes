@@ -1,10 +1,9 @@
-const remoteURL = "http://localhost:5002"
+import APIManager from "./APIManager"
 
-export default {
-  get(id) {
-    return fetch(`${remoteURL}/petCrosswalk/${id}`).then(e => e.json())
-  },
-  getAll() {
-    return fetch(`${remoteURL}/petCrosswalk`).then(e => e.json())
+class PetCrosswalkManager extends APIManager {
+
+  postCrosswalk(newCrosswalk){
+    return this.post(newCrosswalk)
   }
 }
+export default new PetCrosswalkManager("petCrosswalk")

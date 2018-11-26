@@ -11,6 +11,8 @@ export default class NavBar extends Component {
     this.setState({searchInput: e.target.value})
   }
 
+
+
   render() {
     return (
       <nav className="navbar navbar-light fixed-top light-blue flex-md-nowrap p-0 shadow">
@@ -30,9 +32,10 @@ export default class NavBar extends Component {
           <li className="nav-item">
             <form className="form-inline">
               <input type="text" className="form-control" name="name" value={this.state.searchInput} onChange={e => this.handleSearch(e)} />
-              <Link className="nav-link btn btn-primary" to="/search"                  onClick={(props) => {
+              <Link className="nav-link btn btn-primary" to="/search"
+              onClick={() => {
                 console.log(this.state.searchInput)
-                // return <Search searchInput={this.handleSearch}/>
+                // return <Search searchInput={this.state.searchInput}/>
               }}
                   >Search</Link>
             </form>

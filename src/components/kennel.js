@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 
 
 export default class Kennel extends Component {
+
     render() {
         return (
             <React.Fragment>

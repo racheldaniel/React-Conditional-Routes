@@ -1,0 +1,10 @@
+.employeeButton {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 100px 0 10px 0;
+}
+
+.employeeForm{
+  margin: 100px 50px 10px 50px;
+
+}

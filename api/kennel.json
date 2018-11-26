@@ -28,23 +28,39 @@
   "animals": [
     {
       "id": 2,
-      "name": "Jack"
+      "name": "Jack",
+      "breed": "Jack Russel Terrier",
+      "employeeId": 1
     },
     {
       "id": 3,
-      "name": "Angus"
+      "name": "Angus",
+      "breed": "Dalmation",
+      "employeeId": 1
     },
     {
       "id": 4,
-      "name": "Henley"
+      "name": "Henley",
+      "breed": "parakeet",
+      "employeeId": 2
     },
     {
       "id": 5,
-      "name": "Derkins"
+      "name": "Derkins",
+      "breed": "Pit Bull",
+      "employeeId": 2
     },
     {
       "id": 6,
-      "name": "Checkers"
+      "name": "Checkers",
+      "breed": "hamster",
+      "employeeId": 3
+    },
+    {
+      "name": "Sookie",
+      "breed": "Cat",
+      "employeeId": 1,
+      "id": 7
     }
   ],
   "owners": [
@@ -72,6 +88,11 @@
       "id": 6,
       "name": "Angela Lee",
       "phoneNumber": "615-555-7777"
+    },
+    {
+      "name": "Rachel Daniel",
+      "phoneNumber": "6155980659",
+      "id": 7
     }
   ],
   "petCrosswalk": [
@@ -104,6 +125,11 @@
       "id": 6,
       "petId": 6,
       "ownerId": 4
+    },
+    {
+      "petId": 7,
+      "ownerId": 7,
+      "id": 7
     }
   ]
 }
