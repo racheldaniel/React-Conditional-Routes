@@ -1,0 +1,15 @@
+/* .animalButton {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 100px 0 10px 0;
+
+} */
+
+.loginForm {
+  margin: 100px 50px 10px 50px;
+
+}
+
+input {
+  margin: 0px 20px;
+}

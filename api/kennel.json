@@ -88,11 +88,6 @@
       "id": 6,
       "name": "Angela Lee",
       "phoneNumber": "615-555-7777"
-    },
-    {
-      "name": "Rachel Daniel",
-      "phoneNumber": "6155980659",
-      "id": 7
     }
   ],
   "petCrosswalk": [
@@ -125,11 +120,6 @@
       "id": 6,
       "petId": 6,
       "ownerId": 4
-    },
-    {
-      "petId": 7,
-      "ownerId": 7,
-      "id": 7
     }
   ]
 }

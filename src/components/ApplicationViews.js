@@ -1,4 +1,4 @@
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import React, { Component } from "react"
 import AnimalList from './animal/AnimalList'
 import LocationList from './location/LocationList'
@@ -14,11 +14,13 @@ import AnimalDetail from "../components/animal/AnimalDetail"
 import AnimalForm from "../components/animal/AnimalForm"
 import EmployeeForm from "../components/employee/EmployeeForm"
 import OwnerForm from "../components/owner/OwnerForm"
-
+import Login from './authentication/Login'
 
 
 export default class ApplicationViews extends Component {
 
+  // Check if credentials are in local storage
+  isAuthenticated = () => sessionStorage.getItem("credentials") !== null
 
   state = {
     owners: [],
@@ -119,14 +121,23 @@ export default class ApplicationViews extends Component {
     return (
       <React.Fragment>
         <Route exact path="/" render={(props) => {
-          return <LocationList locations={this.state.locations} />
+          if (this.isAuthenticated()) {
+            return <LocationList locations={this.state.locations} />
+          } else {
+            return <Redirect to="/login" />
+          }
         }} />
+        <Route path="/login" component={Login} />
         <Route exact path="/animals" render={(props) => {
-          return <AnimalList {...props}
-            animals={this.state.animals}
-            owners={this.state.owners}
-            pets={this.state.petCrosswalk}
-            deleteAnimal={this.deleteAnimal} />
+          if (this.isAuthenticated()) {
+            return <AnimalList {...props}
+              animals={this.state.animals}
+              owners={this.state.owners}
+              pets={this.state.petCrosswalk}
+              deleteAnimal={this.deleteAnimal} />
+          } else {
+            return <Redirect to="/login" />
+          }
         }} />
         <Route path="/animals/:animalId(\d+)" render={(props) => {
           return <AnimalDetail
@@ -137,20 +148,29 @@ export default class ApplicationViews extends Component {
             addAnimal={this.addAnimal}
             employees={this.state.employees} />
         }} />
-        <Route exact path="/employees" render={(props) => {
-          return <EmployeeList {...props}
-            employees={this.state.employees}
-            deleteEmployee={this.deleteEmployee} />
+        <Route exact path="/employees" render={props => {
+          if (this.isAuthenticated()) {
+            return <EmployeeList {...props}
+              deleteEmployee={this.deleteEmployee}
+              employees={this.state.employees} />
+          } else {
+            return <Redirect to="/login" />
+          }
         }} />
         <Route path="/employees/new" render={(props) => {
           return <EmployeeForm {...props}
             addEmployee={this.addEmployee} />
         }} />
         <Route exact path="/owners" render={(props) => {
-          return <OwnerList {...props}
-            owners={this.state.owners}
-            deleteOwner={this.deleteOwner} />
+          if (this.isAuthenticated()) {
+            return <OwnerList {...props}
+              owners={this.state.owners}
+              deleteOwner={this.deleteOwner} />
+          } else {
+            return <Redirect to="/login" />
+          }
         }} />
+
         <Route path="/owners/new" render={(props) => {
           return <OwnerForm {...props}
             addOwner={this.addOwner}
